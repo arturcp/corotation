@@ -1,6 +1,9 @@
 from django.db import models
 import requests
 
+import os
+from django.conf import settings
+
 class Spider():
     # https://github.com/kennethreitz/requests/
     # https://wilton.unifei.edu.br/ocdb/readme.txt
@@ -24,3 +27,16 @@ class Cluster():
         cluster.galaticLongitudeII = line[18:25].strip()
         cluster.radial_velocity = line[134:139].strip()
         return cluster
+
+
+class Catalog():
+    @classmethod
+    def all(self):
+        file_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'clustersGAL.txt')
+
+        with open(file_path) as f:
+            content = f.readlines()
+
+        content = [x.strip() for x in content]
+
+        return map(Cluster.from_line, content)
