@@ -38,14 +38,14 @@ class Cluster():
         cluster.line = line
 
         cluster.name = line[0:17].strip()
-        cluster.galatic_longitude = line[18:25].strip()
-        cluster.galatic_latitude_sign = line[32]
-        cluster.galatic_latitude = line[33:39].strip()
+        cluster.galactic_longitude = line[18:25].strip()
+        cluster.galactic_latitude_sign = line[32]
+        cluster.galactic_latitude = line[33:39].strip()
         cluster.classification_flag = line[46:47].strip()
         cluster.apparent_diameter_in_arcmin = line[53:57].strip()
         cluster.distance = line[61:65].strip()
         cluster.color_excess_in_bv = line[72:76].strip()
-        cluster.age_in_log_t = line[79:84]
+        cluster.age_in_log_t = line[79:84].strip()
         cluster.mean_proper_motion_in_mu_l_sign = line[90]
         cluster.mean_proper_motion_in_mu_l_icrs = line[91:95].strip()
         cluster.standard_deviation_in_pml = line[98:101].strip()
@@ -68,13 +68,13 @@ class Cluster():
         return cluster
 
     def glon(self):
-        return self.galatic_longitude
+        return self.galactic_longitude
 
     def de_sign(self):
-        return self.galatic_latitude_sign
+        return self.galactic_latitude_sign
 
     def glat(self):
-        return self.galatic_latitude
+        return self.galactic_latitude
 
     def klass(self):
         return self.classification_flag

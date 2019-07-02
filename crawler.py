@@ -3,15 +3,30 @@ import requests
 from clusters import Cluster
 
 def write(text, size, suffix = '|'):
-    print(f'{text.ljust(size)}{suffix}')
+    print(f'{text.ljust(size)}{suffix} ', end = '')
 
 def print_results(lines):
-    print('============================================================================== Catalog ==============================================================================')
-    print('NAME              |')
-    print('=====================================================================================================================================================================')
+    print('')
+    print('                                                                       CATALOG')
+    print(' =====================================================================================================================================================================')
+    print(' | NAME              | DISTANCE | AGE (LOG T) | PROPER MOTION L | PROPER MOTION B | RADIAL VELOCITY | LATITUDE | LONGITUDE |                                          |')
+    print(' =====================================================================================================================================================================')
 
-    cluster = Cluster.from_line(lines[0])
-    write(cluster.name, 18)
+    for line in lines:
+        cluster = Cluster.from_line(line)
+        write(' ', 1)
+        write(cluster.name, 18)
+        write(cluster.distance, 9)
+        write(cluster.age_in_log_t, 12)
+        write(cluster.mean_proper_motion_in_mu_l_icrs, 16)
+        write(cluster.mean_proper_motion_in_mu_b_icrs, 16)
+        write(cluster.radial_velocity, 16)
+        write(cluster.galactic_latitude, 9)
+        write(cluster.galactic_longitude, 9)
+        write('', 42)
+        print('')
+    print(' =====================================================================================================================================================================')
+    print('')
 
 # https://github.com/kennethreitz/requests/
 # https://wilton.unifei.edu.br/ocdb/readme.txt
@@ -22,7 +37,7 @@ def from_web():
     print_results(lines)
 
 def from_file():
-    lines = [line.rstrip('\n') for line in open('./catalogs/clustersGAL.txt')]
+    lines = [line.rstrip('\n') for line in open('./catalogs/shortClustersGAL.txt')]
     print_results(lines)
 
 # from_web()
