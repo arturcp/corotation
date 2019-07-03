@@ -22,7 +22,7 @@ def print_results(lines):
             write(cluster.mean_proper_motion_in_mu_l_icrs, 16)
             write(cluster.mean_proper_motion_in_mu_b_icrs, 16)
             write(cluster.radial_velocity, 16)
-            write(cluster.galactic_latitude, 9)
+            write(cluster.latitude_with_sign(), 9)
             write(cluster.galactic_longitude, 9)
             write('', 42)
             print('')
@@ -38,7 +38,7 @@ def from_web():
     print_results(lines)
 
 def from_file():
-    lines = [line.rstrip('\n') for line in open('./catalogs/shortClustersGAL.txt')]
+    lines = [line.rstrip('\n') for line in open('./catalogs/clustersGAL.txt')]
     print_results(lines)
 
 # from_web()

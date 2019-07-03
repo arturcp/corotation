@@ -145,6 +145,9 @@ class Cluster():
     def trtyp(self):
         return self.trumpler_type
 
+    def latitude_with_sign(self):
+        return self.galactic_latitude_sign + self.galactic_latitude
+
     def valid(self):
         return self.radial_velocity and self.age_in_log_t and self.distance and \
           self.galactic_longitude and self.galactic_latitude and \
