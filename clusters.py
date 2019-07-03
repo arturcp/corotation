@@ -144,3 +144,8 @@ class Cluster():
 
     def trtyp(self):
         return self.trumpler_type
+
+    def valid(self):
+        return self.radial_velocity and self.age_in_log_t and self.distance and \
+          self.galactic_longitude and self.galactic_latitude and \
+          self.mean_proper_motion_in_mu_l_icrs and self.mean_proper_motion_in_mu_b_icrs
