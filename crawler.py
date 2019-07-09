@@ -9,7 +9,7 @@ def print_results(lines):
     print('')
     print('                                                                       CATALOG')
     print(' =====================================================================================================================================================================')
-    print(' | NAME              | DISTANCE | AGE (LOG T) | PROPER MOTION L | PROPER MOTION B | RADIAL VELOCITY | LATITUDE | LONGITUDE |                                          |')
+    print(' | NAME              | DISTANCE | AGE (LOG T) | PROPER MOTION L | PROPER MOTION B | RADIAL VELOCITY | LATITUDE | LONGITUDE |                                         |')
     print(' =====================================================================================================================================================================')
 
     for line in lines:
@@ -23,8 +23,8 @@ def print_results(lines):
             write(cluster.mean_proper_motion_in_mu_b_icrs, 16)
             write(cluster.radial_velocity, 16)
             write(cluster.latitude_with_sign(), 9)
-            write(cluster.galactic_longitude, 9)
-            write('', 42)
+            write(cluster.galactic_longitude, 10)
+            write('', 40)
             print('')
     print(' =====================================================================================================================================================================')
     print('')
