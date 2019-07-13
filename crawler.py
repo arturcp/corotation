@@ -1,6 +1,11 @@
 #!/usr/bin/python
 import requests
+import argparse, sys
 from clusters import Cluster
+
+parser=argparse.ArgumentParser()
+parser.add_argument('--distance', help='Do the bar option')
+args=parser.parse_args()
 
 def write(text, size, suffix = '|'):
     print(f'{text.ljust(size)}{suffix} ', end = '')
@@ -13,7 +18,7 @@ def print_results(lines):
     print(' =====================================================================================================================================================================')
 
     for line in lines:
-        cluster = Cluster.from_line(line)
+        cluster = Cluster.from_line(line, args)
         if cluster.valid():
             write(' ', 1)
             write(cluster.name, 18)

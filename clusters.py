@@ -1,5 +1,8 @@
 #!/usr/bin/python
 class Cluster():
+    def __init__(self, args):
+        self.args = args
+
     # Byte-by-byte Description of file:  clustersGAL.txt
     # -------------------------------------------------------------------------------------------------
     #    Bytes Format Units   Label     Explanations
@@ -33,37 +36,37 @@ class Cluster():
     #  191-198  A8    ---     TrTyp     Trumpler Type determined in the DSS inspection
     # -------------------------------------------------------------------------------------------------
     @classmethod
-    def from_line(self, line):
-        cluster = Cluster()
+    def from_line(self, line, args):
+        cluster = Cluster(args)
         cluster.line = line
 
-        cluster.name = line[0:17].strip()
-        cluster.galactic_longitude = line[18:25].strip()
-        cluster.galactic_latitude_sign = line[32]
-        cluster.galactic_latitude = line[33:39].strip()
-        cluster.classification_flag = line[46:47].strip()
-        cluster.apparent_diameter_in_arcmin = line[53:57].strip()
-        cluster.distance = line[61:65].strip()
-        cluster.color_excess_in_bv = line[72:76].strip()
-        cluster.age_in_log_t = line[79:84].strip()
-        cluster.mean_proper_motion_in_mu_l_sign = line[90]
-        cluster.mean_proper_motion_in_mu_l_icrs = line[91:95].strip()
-        cluster.standard_deviation_in_pml = line[98:101].strip()
-        cluster.mean_proper_motion_in_mu_b_sign = line[106]
-        cluster.mean_proper_motion_in_mu_b_icrs = line[107:111].strip()
-        cluster.standard_deviation_in_pmb = line[115:118].strip()
-        cluster.number_of_members = line[120:124].strip()
-        cluster.source_of_the_mean_proper_motion_determination = line[126:128].strip()
-        cluster.radial_velocity_sign = line[133]
-        cluster.radial_velocity = line[134:139].strip()
-        cluster.error_in_radial_velocity = line[144:148].strip()
-        cluster.number_of_stars_used_to_determine_radial_velocity = line[152:155].strip()
-        cluster.source_of_the_mean_radial_velocity_determination = line[161:164].strip()
-        cluster.metallicity_sign = line[168]
-        cluster.metallicity = line[169:173].strip()
-        cluster.error_in_metallicity = line[177:181].strip()
-        cluster.number_of_stars_used_to_determine_metallicity = line[184:186].strip()
-        cluster.trumpler_type = line[190:197].strip()
+        cluster.name = line[0:18].strip()
+        cluster.galactic_longitude = line[18:26].strip()
+        cluster.galactic_latitude_sign = line[33]
+        cluster.galactic_latitude = line[33:40].strip()
+        cluster.classification_flag = line[46:48].strip()
+        cluster.apparent_diameter_in_arcmin = line[53:58].strip()
+        cluster.distance = line[61:66].strip()
+        cluster.color_excess_in_bv = line[72:77].strip()
+        cluster.age_in_log_t = line[79:85].strip()
+        cluster.mean_proper_motion_in_mu_l_sign = line[91]
+        cluster.mean_proper_motion_in_mu_l_icrs = line[91:96].strip()
+        cluster.standard_deviation_in_pml = line[98:102].strip()
+        cluster.mean_proper_motion_in_mu_b_sign = line[107]
+        cluster.mean_proper_motion_in_mu_b_icrs = line[107:112].strip()
+        cluster.standard_deviation_in_pmb = line[115:119].strip()
+        cluster.number_of_members = line[120:125].strip()
+        cluster.source_of_the_mean_proper_motion_determination = line[126:129].strip()
+        cluster.radial_velocity_sign = line[134]
+        cluster.radial_velocity = line[134:140].strip()
+        cluster.error_in_radial_velocity = line[144:149].strip()
+        cluster.number_of_stars_used_to_determine_radial_velocity = line[152:156].strip()
+        cluster.source_of_the_mean_radial_velocity_determination = line[161:165].strip()
+        cluster.metallicity_sign = line[169]
+        cluster.metallicity = line[169:174].strip()
+        cluster.error_in_metallicity = line[177:182].strip()
+        cluster.number_of_stars_used_to_determine_metallicity = line[184:187].strip()
+        cluster.trumpler_type = line[190:198].strip()
 
         return cluster
 
@@ -148,7 +151,16 @@ class Cluster():
     def latitude_with_sign(self):
         return self.galactic_latitude_sign + self.galactic_latitude
 
+    def match_conditions(self):
+        if self.args.distance:
+            distance = int(self.args.distance)
+        else:
+            distance = 80000
+
+        return int(self.distance) <= distance
+
     def valid(self):
         return self.radial_velocity and self.age_in_log_t and self.distance and \
           self.galactic_longitude and self.galactic_latitude and \
-          self.mean_proper_motion_in_mu_l_icrs and self.mean_proper_motion_in_mu_b_icrs
+          self.mean_proper_motion_in_mu_l_icrs and self.mean_proper_motion_in_mu_b_icrs and \
+          self.match_conditions()
