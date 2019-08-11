@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import requests
 import argparse, sys
-from clusters import Cluster
+from cluster import Cluster
 
 parser=argparse.ArgumentParser()
 parser.add_argument('--distance', help='Do the bar option')
