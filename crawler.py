@@ -4,7 +4,7 @@ import argparse, sys
 from cluster import Cluster
 
 parser=argparse.ArgumentParser()
-parser.add_argument('--distance', help='Do the bar option')
+parser.add_argument('--distance', help='Max distance')
 args=parser.parse_args()
 
 def write(text, size, suffix = '|'):
