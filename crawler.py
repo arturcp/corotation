@@ -3,10 +3,6 @@ import requests
 import argparse, sys
 from cluster import Cluster
 
-parser=argparse.ArgumentParser()
-parser.add_argument('--distance', help='Max distance')
-args=parser.parse_args()
-
 def write(text, size, suffix = '|'):
     print(f'{text.ljust(size)}{suffix} ', end = '')
 
@@ -18,7 +14,7 @@ def print_results(lines):
     print(' =====================================================================================================================================================================')
 
     for line in lines:
-        cluster = Cluster.from_line(line, args)
+        cluster = Cluster.from_line(line)
         if cluster.valid():
             write(' ', 1)
             write(cluster.name, 18)

@@ -1,8 +1,5 @@
 #!/usr/bin/python
 class Cluster():
-    def __init__(self, args):
-        self.args = args
-
     # Byte-by-byte Description of file:  clustersGAL.txt
     # -------------------------------------------------------------------------------------------------
     #    Bytes Format Units   Label     Explanations
@@ -36,8 +33,8 @@ class Cluster():
     #  191-198  A8    ---     TrTyp     Trumpler Type determined in the DSS inspection
     # -------------------------------------------------------------------------------------------------
     @classmethod
-    def from_line(self, line, args):
-        cluster = Cluster(args)
+    def from_line(self, line):
+        cluster = Cluster()
         cluster.line = line
 
         cluster.name = line[0:18].strip()
@@ -151,16 +148,7 @@ class Cluster():
     def latitude_with_sign(self):
         return self.galactic_latitude_sign + self.galactic_latitude
 
-    def match_conditions(self):
-        if self.args.distance:
-            distance = int(self.args.distance)
-        else:
-            distance = 80000
-
-        return int(self.distance) <= distance
-
     def valid(self):
         return self.radial_velocity and self.age_in_log_t and self.distance and \
           self.galactic_longitude and self.galactic_latitude and \
-          self.mean_proper_motion_in_mu_l_icrs and self.mean_proper_motion_in_mu_b_icrs and \
-          self.match_conditions()
+          self.mean_proper_motion_in_mu_l_icrs and self.mean_proper_motion_in_mu_b_icrs
