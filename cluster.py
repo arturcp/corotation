@@ -1,6 +1,7 @@
 #!/usr/bin/python
 class Cluster():
     # Byte-by-byte Description of file:  clustersGAL.txt
+    # https://wilton.unifei.edu.br/ocdb/readme.txt
     # -------------------------------------------------------------------------------------------------
     #    Bytes Format Units   Label     Explanations
     # -------------------------------------------------------------------------------------------------
